@@ -3,4 +3,7 @@
 	<output-test url="file://$MODULE_DIR$/out/test/D0010E-Lab-5"/>
 	<exclude-output/>
 	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="junit-4.12.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/lib/junit-4.12.jar!/"/>
+	</lib>
 </component>

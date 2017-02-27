@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/plugins/junit/lib/junit-jupiter-api-5.0.0-M3.jar"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/groovy-all-2.4.6.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
 	<classpathentry kind="output" path="out/production/D0010E-Lab-5"/>
 </classpath>

@@ -15,11 +15,11 @@ public class Simulator {
     }
 
     public void run(){
-        Event currentEvent;
+        Event nextEvent;
         while (state.simulating){
             eventQueue.sortEvents();
-            currentEvent = eventQueue.getFirstEvent();
-            currentEvent.runEvent();
+            nextEvent = eventQueue.getFirstEvent();
+            nextEvent.runEvent(state,eventQueue);
         }
     }
 }
