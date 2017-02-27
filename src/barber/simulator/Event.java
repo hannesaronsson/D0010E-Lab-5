@@ -9,6 +9,13 @@ public abstract class Event {
 
     public double time;
 
+    /**
+     * Executes the event
+     * @param state
+     *      The current SimulationSate
+     * @param eventQueue
+     *      The current EventQueue
+     */
     public void runEvent(SimulatorState state, EventQueue eventQueue){
     }
 }
