@@ -11,11 +11,10 @@ public abstract class Event {
 
     /**
      * Executes the event
-     * @param state
-     *      The current SimulationSate
-     * @param eventQueue
-     *      The current EventQueue
+     *
+     * @param state      The current SimulationSate
+     * @param eventQueue The current EventQueue
      */
-    public void runEvent(SimulatorState state, EventQueue eventQueue){
+    public void runEvent(SimulatorState state, EventQueue eventQueue) {
     }
 }

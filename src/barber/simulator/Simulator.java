@@ -11,12 +11,10 @@ public class Simulator {
     /**
      * Constructor
      *
-     * @param eventQueue
-     *      The queue for the events for the simulation.
-     * @param state
-     *      The simulation state.
+     * @param eventQueue The queue for the events for the simulation.
+     * @param state      The simulation state.
      */
-    public Simulator(EventQueue eventQueue, SimulatorState state){
+    public Simulator(EventQueue eventQueue, SimulatorState state) {
         this.eventQueue = eventQueue;
         this.state = state;
 
@@ -25,12 +23,12 @@ public class Simulator {
     /**
      * Runs the simulation until the simulation state is changed to stop.
      */
-    public void run(){
+    public void run() {
         Event nextEvent;
-        while (state.simulating){
+        while (state.simulating) {
             eventQueue.sortEvents();
             nextEvent = eventQueue.getFirstEvent();
-            nextEvent.runEvent(state,eventQueue);
+            nextEvent.runEvent(state, eventQueue);
         }
     }
 }

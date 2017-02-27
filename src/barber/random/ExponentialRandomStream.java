@@ -13,10 +13,8 @@ public class ExponentialRandomStream {
     /**
      * Constructor
      *
-     * @param lambda
-     *      Constant that indicates how many costumers that enters every hour on average.
-     * @param seed
-     *      Seed for random generator.
+     * @param lambda Constant that indicates how many costumers that enters every hour on average.
+     * @param seed   Seed for random generator.
      */
     public ExponentialRandomStream(double lambda, long seed) {
         rand = new Random(seed);
@@ -24,9 +22,7 @@ public class ExponentialRandomStream {
     }
 
     /**
-     *
-     * @param lambda
-     *      Constant that indicates how many costumers that enters every hour on average.
+     * @param lambda Constant that indicates how many costumers that enters every hour on average.
      */
     public ExponentialRandomStream(double lambda) {
         rand = new Random();
@@ -36,10 +32,9 @@ public class ExponentialRandomStream {
     /**
      * Gives the next double using the seed.
      *
-     * @return
-     *      Next double for the seed.
+     * @return Next double for the seed.
      */
     public double next() {
-        return -Math.log(rand.nextDouble())/lambda;
+        return -Math.log(rand.nextDouble()) / lambda;
     }
 }
