@@ -15,6 +15,6 @@ public abstract class Event {
      * @param state      The current SimulationSate
      * @param eventQueue The current EventQueue
      */
-    public void runEvent(SimulatorState state, EventQueue eventQueue) {
-    }
+    public abstract void runEvent(SimulatorState state, EventQueue eventQueue);
+
 }
