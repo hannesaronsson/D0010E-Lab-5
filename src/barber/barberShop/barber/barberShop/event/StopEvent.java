@@ -1,7 +1,31 @@
 package barber.barberShop.barber.barberShop.event;
 
+import barber.simulator.Event;
+import barber.simulator.EventQueue;
+import barber.simulator.SimulatorState;
+
 /**
  * Created by Mumrik on 2017-02-27.
  */
-public class StopEvent {
+public class StopEvent extends Event {
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param value
+	 */
+	public StopEvent(double value) {
+		// the time when the simulation should break, time = (value);
+	}
+	/**
+	 * Breaks the simulation
+	 * @param state
+	 */
+	private void emergencyBreak(SimulatorState state) {
+		// break the simulation, state.emergency();
+	}
+	
+	public void runEvent(SimulatorState state, EventQueue eventQueue) {
+		emergencyBreak(state);
+	}
 }
