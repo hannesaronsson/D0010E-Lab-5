@@ -1,7 +1,5 @@
 package barber.barberShop.barber.barberShop.event;
 
-import barber.barber.customerFactory.Customer;
-import barber.barber.customerFactory.CustomerFactory;
 import barber.simulator.Event;
 import barber.simulator.EventQueue;
 import barber.simulator.SimulatorState;
@@ -11,14 +9,12 @@ import barber.simulator.SimulatorState;
  */
 public class ArrivedEvent extends Event{
 	
-	Customer customer;
-	
 	public ArrivedEvent() {
-		// creates a new customer
+		
 	}
 	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
-		
+		// call method in state to create new customer, add to fifo queue
 	}
 	
 }

@@ -1,7 +1,5 @@
 package barber.barberShop.barber.barberShop.event;
 
-import barber.barber.customerFactory.Customer;
-import barber.barber.customerFactory.CustomerFactory;
 import barber.simulator.Event;
 import barber.simulator.EventQueue;
 import barber.simulator.SimulatorState;
@@ -14,10 +12,11 @@ public class StartEvent extends Event {
 	ArrivedEvent startEvent;
 	
 	public StartEvent() {
-		startEvent = new ArrivedEvent();
+		setTime(0.0); // because this is the startevent, it starts at 0.0
 	}
 	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
+		startEvent = new ArrivedEvent(); // creates a new ArrivedEvent
 		eventQueue.addEvent(startEvent);
 	}
 }

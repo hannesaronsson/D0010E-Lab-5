@@ -15,14 +15,16 @@ public class StopEvent extends Event {
 	 * @param value
 	 */
 	public StopEvent(double value) {
-		// the time when the simulation should break, time = (value);
+		setTime(value);
 	}
+	
 	/**
 	 * Breaks the simulation
 	 * @param state
 	 */
 	private void emergencyBreak(SimulatorState state) {
-		// break the simulation, state.emergency();
+		// break the simulation 
+		//state.emergency();
 	}
 	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
