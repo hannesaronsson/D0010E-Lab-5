@@ -11,16 +11,18 @@ import barber.barberShop.EventType;
 /**
  * Created by Mumrik on 2017-02-27.
  */
-public class ArrivedEvent extends Event{
+public class ArrivedEvent extends Event {
     private EventType type = EventType.ARRIVED;
     Customer customer;
 
-	public ArrivedEvent() {
-		// creates a new customer
-	}
+    public ArrivedEvent() {
+        // creates a new customer
+    }
 
-	public void runEvent(SimulatorState state, EventQueue eventQueue) {
+    public void runEvent(SimulatorState state, EventQueue eventQueue) {
 
-	}
+    }
+}
+
 
 

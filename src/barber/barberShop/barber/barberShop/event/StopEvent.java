@@ -10,7 +10,7 @@ import barber.simulator.SimulatorState;
  * Created by Mumrik on 2017-02-27.
  */
 public class StopEvent extends Event {
-    private EventType type = EventType.STOP;
+	private EventType type = EventType.STOP;
 
 	/**
 	 * Constructor
@@ -20,8 +20,10 @@ public class StopEvent extends Event {
 	public StopEvent(double value) {
 		// the time when the simulation should break, time = (value);
 	}
+
 	/**
 	 * Breaks the simulation
+	 *
 	 * @param state
 	 */
 	private void emergencyBreak(SimulatorState state) {
@@ -31,6 +33,6 @@ public class StopEvent extends Event {
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		emergencyBreak(state);
 	}
-
+}
 
 

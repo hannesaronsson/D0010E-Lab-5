@@ -15,9 +15,10 @@ public class DissatisfiedEvent extends Event {
 
     public DissatisfiedEvent(Customer customer) {
 
-	}
+    }
 
-	public void runEvent(SimulatorState state, EventQueue eventQueue) {
+    public void runEvent(SimulatorState state, EventQueue eventQueue) {
 
-	}
+    }
 
+}

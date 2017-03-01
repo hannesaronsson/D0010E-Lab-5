@@ -13,14 +13,14 @@ import barber.barberShop.EventType;
  */
 public class StartEvent extends Event {
     private EventType type = EventType.START;
-	ArrivedEvent startEvent;
+    ArrivedEvent startEvent;
 
-	public StartEvent() {
-		startEvent = new ArrivedEvent();
-	}
+    public StartEvent() {
+        startEvent = new ArrivedEvent();
+    }
 
-	public void runEvent(SimulatorState state, EventQueue eventQueue) {
-		eventQueue.addEvent(startEvent);
-	}
+    public void runEvent(SimulatorState state, EventQueue eventQueue) {
+        eventQueue.addEvent(startEvent);
+    }
 
-
+}

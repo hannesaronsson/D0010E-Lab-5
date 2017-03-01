@@ -9,10 +9,11 @@ import barber.barberShop.EventType;
 /**
  * Created by Mumrik on 2017-02-27.
  */
-public class ReadyBarberEvent extends Event{
+public class ReadyBarberEvent extends Event {
     EventType type = EventType.READY_BARBER;
 
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
 
-	}
+    }
 
+}
