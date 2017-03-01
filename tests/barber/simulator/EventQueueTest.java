@@ -13,7 +13,7 @@ class EventQueueTest {
 
     @Test
     void testEventQueue() {
-            Event b = new Event() {
+        Event b = new Event() {
                 @Override
                 public void runEvent(SimulatorState state, EventQueue eventQueue) {
                     time = 1;

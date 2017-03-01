@@ -4,6 +4,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="var" path="APPLICATION_HOME_DIR/plugins/junit/lib/junit-jupiter-api-5.0.0-M3.jar"/>
-	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/junit-4.12.jar"/>
 	<classpathentry kind="output" path="out/production/D0010E-Lab-5"/>
 </classpath>

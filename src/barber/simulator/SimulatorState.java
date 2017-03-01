@@ -8,4 +8,12 @@ import java.util.Observable;
 public class SimulatorState extends Observable {
 
     boolean simulating;
+
+    public boolean isSimulating() {
+        return simulating;
+    }
+
+    public void setSimulating(boolean simulating) {
+        this.simulating = simulating;
+    }
 }
