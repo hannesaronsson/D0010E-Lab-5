@@ -7,8 +7,26 @@ import barber.random.Time;
  */
 public abstract class Event {
 
-    public double time;
-
+    private double time;
+    
+    /**
+     * Returns time
+     * 
+     * @return
+     */
+    public double getTime() {
+    	return time;
+    }
+    
+    /**
+     * Sets the time
+     * 
+     * @param time		The time to assign to the variable
+     */
+    public void setTime(double time) {
+    	this.time = time;
+    }
+    
     /**
      * Executes the event
      *

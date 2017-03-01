@@ -42,8 +42,8 @@ public class EventQueue {
         Collections.sort(eventQueue, new Comparator<Event>() {
             @Override
             public int compare(Event eventOne, Event eventTwo) {
-                if (eventTwo.time > eventOne.time) return -1;
-                if (eventTwo.time > eventOne.time) return 1;
+                if (eventTwo.getTime() > eventOne.getTime()) return -1;
+                if (eventTwo.getTime() > eventOne.getTime()) return 1;
                 else return 0;
 
             }
