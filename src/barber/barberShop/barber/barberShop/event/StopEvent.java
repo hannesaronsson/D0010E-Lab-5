@@ -14,12 +14,12 @@ public class StopEvent extends Event {
 	private EventType type = EventType.STOP;
 
 	/**
-	 * Constructor
+	 * Constructor. 
 	 *
-	 * @param value
+	 * @param time Assigns the time to this object.
 	 */
-	public StopEvent(double value) {
-		setTime(value);
+	public StopEvent(double time) {
+		setTime(time);
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class StopEvent extends Event {
 	 */
 	private void emergencyBreak(SimulatorState state) {
 		// break the simulation 
-		//state.emergency();
+		//state.emergencyBreak();
 	}
 
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {

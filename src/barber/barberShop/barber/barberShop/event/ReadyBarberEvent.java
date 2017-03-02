@@ -11,8 +11,10 @@ import barber.barberShop.EventType;
  */
 public class ReadyBarberEvent extends Event {
     
-	EventType type = EventType.READY_BARBER;
-
+	private EventType type = EventType.READY_BARBER;
+	
+	// also acts as a Customer Leaves Event
+	
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
 
     }

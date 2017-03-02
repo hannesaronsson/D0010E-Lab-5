@@ -3,7 +3,7 @@ package barber.barberShop.barber.barberShop.event;
 import barber.simulator.Event;
 import barber.simulator.EventQueue;
 import barber.simulator.SimulatorState;
-
+import barber.barberShop.BarberState;
 import barber.barberShop.EventType;
 
 /**
@@ -12,14 +12,16 @@ import barber.barberShop.EventType;
 public class StartEvent extends Event {	
 	
 	private EventType type = EventType.START;
-	ArrivedEvent startEvent;
+	private ArrivedEvent firstEvent;
+	private BarberState barberState;
 	
 	public StartEvent() {
 		setTime(0.0); // because this is the startevent, it starts at 0.0
 	}
 	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
-		startEvent = new ArrivedEvent(); // creates a new ArrivedEvent
-		eventQueue.addEvent(startEvent);
+		barberState = (BarberState) state;
+		firstEvent = new ArrivedEvent(barberState.getTime(type)); // creates a new ArrivedEvent and sets time
+		eventQueue.addEvent(firstEvent); // and adds it to the queue
 	}
 }
