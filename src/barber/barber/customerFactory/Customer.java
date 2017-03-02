@@ -6,7 +6,16 @@ package barber.barber.customerFactory;
 public class Customer {
     private int customerID;
     private boolean satisfied;
+    private double cutTime;
 
+
+    public void setCutTime(double cutTime) {
+        this.cutTime = cutTime;
+    }
+
+    public double getCutTime() {
+        return cutTime;
+    }
 
     Customer(int ID) {
         customerID = ID;
