@@ -16,6 +16,7 @@ public class Time {
     private double lastDissatisfiedTime;
     private double totalIdleTime;
 
+
     /**
      * Constructor
      *
@@ -72,23 +73,8 @@ public class Time {
      *
      * @return The next time for a hair cut.
      */
-    public double nextHairCutTime(double currentTime) {
-        double nextEventTime = URSHaircut.next();
-
-        /**
-         * If the current time is greater then the time from the last event
-         * add the time for the next event time to the current time
-         */
-        if (currentTime > lastHairCutTime) {
-            nextEventTime += currentTime;
-            totalIdleTime += nextEventTime - lastHairCutTime;
-            lastHairCutTime = nextEventTime;
-        } else {
-            nextEventTime += lastHairCutTime;
-            totalIdleTime += nextEventTime - lastHairCutTime;
-            lastHairCutTime = nextEventTime;
-        }
-        return nextEventTime;
+    public double HairCutTime() {
+        return URSHaircut.next();
     }
 
     /**
