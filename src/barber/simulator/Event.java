@@ -1,7 +1,5 @@
 package barber.simulator;
 
-import barber.random.Time;
-
 /**
  * Created by Mumrik on 2017-02-27.
  */

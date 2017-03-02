@@ -1,41 +1,42 @@
 package barber.barberShop.barber.barberShop.event;
 
-import barber.barber.customerFactory.Customer;
 import barber.barberShop.BarberState;
-import barber.barberShop.EventType;
 import barber.simulator.Event;
 import barber.simulator.EventQueue;
 import barber.simulator.SimulatorState;
 
-/**
- * Created by Mumrik on 2017-02-27.
+/*
+ * 
+ * Inte säker om den här behövs men lägger till den, så får vi diskutera senare
+ * 
  */
-public class DissatisfiedEvent extends Event {
+public class CloseStoreEvent extends Event {
 	
-	private EventType type = EventType.DISSATISFIED;
-	private Customer customer;
 	private BarberState barberState;
 	
 	/**
 	 * Constructor
 	 * 
-	 * @param customer The customer that is dissatisfied
-	 * @param time The time this customer will return at
+	 * @param time The time when the store should close
 	 */
-	DissatisfiedEvent(Customer customer, double time) {
-		this.customer = customer;
+	CloseStoreEvent(double time) {
 		setTime(time);
 	}
 	
 	/**
-	 * 
+	 * Closes the store
+	 * @param state Which state the store should close in
 	 */
+	private void closeStore(BarberState state) {
+		//state.closeStore();
+	}
+	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		
 		barberState = (BarberState) state;
 		barberState.setCurrentTime(getTime());
 		
-		
+		closeStore( (BarberState) state);
 	}
-}
 
+}

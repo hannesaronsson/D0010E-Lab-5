@@ -1,8 +1,7 @@
 package barber.barberShop.barber.barberShop.event;
 
-import barber.simulator.Event;
-import barber.simulator.EventQueue;
-import barber.simulator.SimulatorState;
+import barber.simulator.*;
+import barber.barber.customerFactory.Customer;
 import barber.barberShop.BarberState;
 
 import barber.barberShop.EventType;
@@ -15,15 +14,28 @@ public class ArrivedEvent extends Event {
 	private EventType type = EventType.ARRIVED;
 	private BarberState barberState;
 	
-    public ArrivedEvent(double time) {
+	/**
+	 * Constructor
+	 * 
+	 * @param time
+	 */
+    ArrivedEvent(double time) {
     	setTime(time);
     }
     
+    /**
+     * Adds a customer to the store, creates a new ArrivedEvent at a random time
+     */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
-    	// call method in state to create new customer, add to fifo queue
+    	
     	barberState = (BarberState) state;
-    	barberState.addCustomer(barberState.createCustomer());
-    	eventQueue.addEvent(new ArrivedEvent(barberState.getTime(type))); // add a new ArrivedEvent to the EventQueue
+    	barberState.setCurrentTime(getTime());
+    	
+    	Customer customer = barberState.createCustomer(); // create a new customer and add it to the store's queue
+    	barberState.addCustomer(customer);
+
+    	eventQueue.addEvent(new StartHaircutEvent(customer, barberState.getTime(TYPE HERE))); // add HaircutEvent and calculate when haircut starts
+    	eventQueue.addEvent(new ArrivedEvent(barberState.getTime(type))); // adds a new ArrivedEvent to the EventQueue
     }
 }
 
