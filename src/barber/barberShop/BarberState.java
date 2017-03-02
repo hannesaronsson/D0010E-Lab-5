@@ -1,13 +1,15 @@
 package barber.barberShop;
 
-import java.util.PriorityQueue;
+import java.util.ArrayList;
 import barber.barber.customerFactory.Customer;
+import barber.barber.customerFactory.CustomerFactory;
 import barber.random.Time;
 import barber.simulator.SimulatorState;
 
 /**
  * Created by Mumrik on 2017-02-27.
  */
+
 public class BarberState extends SimulatorState {
 
 	final int queueCapacity = 6;
@@ -17,11 +19,13 @@ public class BarberState extends SimulatorState {
 	final double upperHairCut = 7;
     final double lowerDissatisfied = 3;
     final double upperDissatisfied = 10;
+    final double simulationStop = 25;
 
     private double currentTime = 0;
 
     Time barberTime = new Time(lambda, seed, lowerHairCut, upperHairCut, lowerDissatisfied, upperDissatisfied);
-	PriorityQueue<Customer> barberQueue = new PriorityQueue<Customer>(queueCapacity);
+    ArrayList<Customer> barberQueue = new ArrayList<Customer>();
+    ArrayList<Customer> dissatisfiedQueue = new ArrayList<Customer>();
 
     public double getCurrentTime() {
     	return currentTime;
@@ -36,10 +40,32 @@ public class BarberState extends SimulatorState {
     }
 
 	public boolean addCustomer(Customer newCustomer) {
+		//För dissatisfied customers, fixa sen
 		if (!newCustomer.getSatisfied()) {
-			//
+			if (barberQueue.size() >= queueCapacity) {
+				//kolla hur många andra kunder som också är missnöjda i kön
+				//skapa en temp arraylist
+				//lägg in alla missnöjda kunder som var där tidigare
+				//lägg in den nya missnödja kunden OM det finns plats, annars ska kunden ta en runda och återkomma senare
+				//lägg in dom tidigare kunderna som ej var missnödja OM det finns plats, släng ut dom annars
+				return false;
+			}
+			
+			else
+				return barberQueue.add(newCustomer);
 		}
-		return barberQueue.add(newCustomer);
+		
+		else
+			if (currentTime >= simulationStop)
+				return false;
+			
+			else if (barberQueue.size() >= queueCapacity) {
+				return false;
+			}
+			
+			else
+				return barberQueue.add(newCustomer);
+		}
 	}
 
 	public boolean removeCustomer(Customer customer)
@@ -50,22 +76,20 @@ public class BarberState extends SimulatorState {
 	public double getTime(EventType eventType) {
 		switch(eventType) {
 			case ARRIVED:
-				return barberTime.nextArrivalTime();
-			case START:
-				return barberTime.nextArrivalTime();
-			case STOP:
-				return barberTime.getTotalQueueTime();
+				return barberTime.nextArrivalTime(currentTime);
 			case READY_BARBER:
-				return barberTime.nextHairCutTime();
+				return barberTime.nextHairCutTime(currentTime);
 			case DISSATISFIED:
-				return barberTime.nextReturnedDissatisfied();
+				return barberTime.nextReturnedDissatisfied(currentTime);
 		}
+		//Fel om detta nås (eclipse kräver en return här)
 		return 0;
 	}
-
-	//??
-	public Customer createCustomer() {
-		return null;
+	
+	public boolean createCustomer() {
+		//Kan inte hämta från factory, måste fixas
+		if (addCustomer(CustomerFactory.newCustomer()))
+			return true;
+		return false;
 	}
-
 }

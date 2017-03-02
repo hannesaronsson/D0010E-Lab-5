@@ -10,6 +10,6 @@ import java.util.Observable;
 public class BarberPrint extends SimulatorPrint {
     @Override
     public void update(Observable o, Object arg) {
-
+    	
     }
 }
