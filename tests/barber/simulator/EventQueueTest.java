@@ -1,12 +1,15 @@
+/*
 package barber.simulator;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+*/
 /**
  * Created by hannesaronsson on 28/02/17.
- */
+ *//*
+
 class EventQueueTest {
     private EventQueue a = new EventQueue();
 
@@ -54,4 +57,4 @@ class EventQueueTest {
         assertEquals(1,a.getFirstEvent().time);
     }
 
-}
+}*/

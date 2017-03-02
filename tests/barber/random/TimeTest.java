@@ -1,3 +1,4 @@
+/*
 package barber.random;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -6,9 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+*/
 /**
  * Created by hannesaronsson on 28/02/17.
- */
+ *//*
+
 class TimeTest {
 
 
@@ -28,4 +31,4 @@ class TimeTest {
         assertTrue(h>g && g>f && f>e && e>d && d>c && c>b);
     }
 
-}
+}*/

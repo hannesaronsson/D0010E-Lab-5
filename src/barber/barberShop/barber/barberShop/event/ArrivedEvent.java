@@ -19,7 +19,7 @@ public class ArrivedEvent extends Event {
     }
 
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
-
+        //call method in state to create new customer, add to fifo queue
     }
 }
 
