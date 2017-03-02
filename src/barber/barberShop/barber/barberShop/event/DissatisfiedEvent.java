@@ -10,9 +10,8 @@ import barber.barberShop.EventType;
  * Created by Mumrik on 2017-02-27.
  */
 public class DissatisfiedEvent extends Event {
-<<<<<<< HEAD
 	
-	
+	private EventType type = EventType.DISSATISFIED;
 	
 	public DissatisfiedEvent() {
 		
@@ -22,16 +21,4 @@ public class DissatisfiedEvent extends Event {
 		
 	}
 }
-=======
-    private EventType type = EventType.DISSATISFIED;
 
-    public DissatisfiedEvent(Customer customer) {
-
-    }
-
-    public void runEvent(SimulatorState state, EventQueue eventQueue) {
-
-    }
-
-}
->>>>>>> origin/master

@@ -9,9 +9,8 @@ import barber.barberShop.EventType;
 /**
  * Created by Mumrik on 2017-02-27.
  */
-<<<<<<< HEAD
 public class StartEvent extends Event {	
-	
+	private EventType type = EventType.START;
 	ArrivedEvent startEvent;
 	
 	public StartEvent() {
@@ -22,18 +21,4 @@ public class StartEvent extends Event {
 		startEvent = new ArrivedEvent(); // creates a new ArrivedEvent
 		eventQueue.addEvent(startEvent);
 	}
-=======
-public class StartEvent extends Event {
-    private EventType type = EventType.START;
-    ArrivedEvent startEvent;
-
-    public StartEvent() {
-        startEvent = new ArrivedEvent();
-    }
-
-    public void runEvent(SimulatorState state, EventQueue eventQueue) {
-        eventQueue.addEvent(startEvent);
-    }
-
->>>>>>> origin/master
 }

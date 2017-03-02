@@ -21,7 +21,7 @@ public abstract class Event {
     /**
      * Sets the time
      * 
-     * @param time		The time to assign to the variable
+     * @param time		The time to assign to the event
      */
     public void setTime(double time) {
     	this.time = time;

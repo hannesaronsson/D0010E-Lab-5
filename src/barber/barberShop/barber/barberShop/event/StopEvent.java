@@ -20,11 +20,7 @@ public class StopEvent extends Event {
 	public StopEvent(double value) {
 		setTime(value);
 	}
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> origin/master
 	/**
 	 * Breaks the simulation
 	 *
