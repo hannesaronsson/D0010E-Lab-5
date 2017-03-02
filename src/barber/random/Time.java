@@ -1,17 +1,20 @@
 package barber.random;
 
 
-import java.util.LinkedList;
-
 /**
- * Created by Mumrik on 2017-02-27.
+ * This object returns times for specific events using Exponential and Uniform random streams.
+ *
+ * @author Hannes Aronsson on 2017-02-27.
  */
 public class Time {
 
     private ExponentialRandomStream ERS;
     private UniformRandomStream URSHaircut;
     private UniformRandomStream URSDissatisfied;
-    private LinkedList<TimeEvent> timeList = new LinkedList<>();
+    private double lastArrivalTime;
+    private double lastHairCutTime;
+    private double lastDissatisfiedTime;
+    private double totalIdleTime;
 
     /**
      * Constructor
@@ -28,7 +31,7 @@ public class Time {
         this.ERS = new ExponentialRandomStream(lambda, seed);
         this.URSHaircut = new UniformRandomStream(lowerHairCut, upperHairCut);
         this.URSDissatisfied = new UniformRandomStream(lowerDissatisfied, upperDissatisfied);
-
+        resetTime();
     }
 
 
@@ -41,28 +44,18 @@ public class Time {
         double nextEventTime = ERS.next();
 
         /**
-         * Iterates for every item in the list.
-         *
-         * If an event is an arrive event add the time of the new
-         * arrive event to the last arrive event.
-         *
-         * If the current time is greater then than the
-         * time from the last event add arrive time to the
-         * current time instead.
+         * If the current time is greater then the time from the last event
+         * add the time for the next event time to the current time
          */
-
-        for (TimeEvent a : timeList) {
-            if (a.eventType == kindOfEvent.ARRIVE && a.time > currentTime) {
-                nextEventTime += a.time;
-                timeList.addFirst(new TimeEvent(kindOfEvent.ARRIVE, nextEventTime));
-                return nextEventTime;
-            } else if (a.time < currentTime) {
-                nextEventTime += currentTime;
-                timeList.addFirst(new TimeEvent(kindOfEvent.ARRIVE, nextEventTime));
-                return nextEventTime;
-            }
+        if (currentTime > lastArrivalTime) {
+            nextEventTime += currentTime;
+            totalIdleTime += nextEventTime - lastArrivalTime;
+            lastArrivalTime = nextEventTime;
+        } else {
+            nextEventTime += lastArrivalTime;
+            totalIdleTime += nextEventTime - lastArrivalTime;
+            lastArrivalTime = nextEventTime;
         }
-        timeList.addFirst(new TimeEvent(kindOfEvent.ARRIVE, nextEventTime));
         return nextEventTime;
     }
 
@@ -83,27 +76,18 @@ public class Time {
         double nextEventTime = URSHaircut.next();
 
         /**
-         * Iterates for every item in the list.
-         *
-         * If an event is a hair cut event add the time of the new
-         * hair cut event to the last hair cut event.
-         *
-         * If the current time is greater then than the
-         * time from the last event add hair cut time to the
-         * current time instead.
+         * If the current time is greater then the time from the last event
+         * add the time for the next event time to the current time
          */
-        for (TimeEvent a : timeList) {
-            if (a.eventType == kindOfEvent.HAIR_CUT && a.time > currentTime) {
-                nextEventTime += a.time;
-                timeList.addFirst(new TimeEvent(kindOfEvent.HAIR_CUT, nextEventTime));
-                return nextEventTime;
-            } else if (a.time < currentTime) {
-                nextEventTime += currentTime;
-                timeList.addFirst(new TimeEvent(kindOfEvent.HAIR_CUT, nextEventTime));
-                return nextEventTime;
-            }
+        if (currentTime > lastHairCutTime) {
+            nextEventTime += currentTime;
+            totalIdleTime += nextEventTime - lastHairCutTime;
+            lastHairCutTime = nextEventTime;
+        } else {
+            nextEventTime += lastHairCutTime;
+            totalIdleTime += nextEventTime - lastHairCutTime;
+            lastHairCutTime = nextEventTime;
         }
-        timeList.addFirst(new TimeEvent(kindOfEvent.HAIR_CUT, nextEventTime));
         return nextEventTime;
     }
 
@@ -113,7 +97,9 @@ public class Time {
      * @return Total idle time.
      * TODO
      */
-    //   public double getTotalIdleTime() {}
+    public double getTotalIdleTime() {
+        return totalIdleTime;
+    }
 
     /**
      * Gives the next time for an returning customer that was dissatisfied for a dissatisfied event.
@@ -123,56 +109,36 @@ public class Time {
     public double nextReturnedDissatisfied(double currentTime) {
         double nextEventTime = URSDissatisfied.next();
 
+
         /**
-         * Iterates for every item in the list.
-         *
-         * If an event is a dissatisfied customer event add the time of the new
-         * event to the last dissatisfied customer event.
-         *
-         * If the current time is greater then than the
-         * time from the last event add dissatisfied customer time to the
-         * current time instead.
+         * If the current time is greater then the time from the last event
+         * add the time for the next event time to the current time
          */
-        for (TimeEvent a : timeList) {
-            if (a.eventType == kindOfEvent.DISSATISFIED && a.time > currentTime) {
-                nextEventTime += a.time;
-                timeList.addFirst(new TimeEvent(kindOfEvent.DISSATISFIED, nextEventTime));
-                return nextEventTime;
-            } else if (a.time < currentTime) {
-                nextEventTime += currentTime;
-                timeList.addFirst(new TimeEvent(kindOfEvent.DISSATISFIED, nextEventTime));
-                return nextEventTime;
-            }
+        if (currentTime > lastDissatisfiedTime) {
+            nextEventTime += currentTime;
+            totalIdleTime += nextEventTime - lastDissatisfiedTime;
+            lastDissatisfiedTime = nextEventTime;
+        } else {
+            nextEventTime += lastDissatisfiedTime;
+            totalIdleTime += nextEventTime - lastDissatisfiedTime;
+            lastDissatisfiedTime = nextEventTime;
         }
-        timeList.addFirst(new TimeEvent(kindOfEvent.DISSATISFIED, nextEventTime));
+
         return nextEventTime;
     }
 
     /**
-     * Removes the TimeEvent for a given time
-     *
-     * @param time The time of the TimeEvent that gets removed.
+     * Resets the time to 0
      */
-    public void removeTime(double time) {
-        for (TimeEvent a : timeList)
-            if (a.time == time) timeList.remove(a);
+    public void resetTime() {
+        lastArrivalTime = 0;
+        lastDissatisfiedTime = 0;
+        lastHairCutTime = 0;
+        totalIdleTime = 0;
     }
-
-    private enum kindOfEvent {
-        ARRIVE,
-        HAIR_CUT,
-        DISSATISFIED
-    }
-
-    private class TimeEvent {
-        kindOfEvent eventType;
-        double time;
-
-        TimeEvent(kindOfEvent eventType, double time) {
-            this.eventType = eventType;
-            this.time = time;
-        }
-    }
-
 
 }
+
+
+
+
