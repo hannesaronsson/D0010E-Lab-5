@@ -13,9 +13,11 @@ import barber.barberShop.EventType;
  */
 public class ReadyBarberEvent extends Event {
     
-	private EventType type = EventType.READY_BARBER;
+	private final EventType READY_BARBER = EventType.READY_BARBER;
 	private Customer customer;
 	private BarberState barberState;
+	
+	private double newReadyBarberTime, stopTime, probability;
 	
 	/**
 	 * Constructor
@@ -35,7 +37,7 @@ public class ReadyBarberEvent extends Event {
 	 * @return
 	 */
 	private boolean isSatisfied(double chance) {
-		double random = Math.random();
+		double random = Math.random(); // not sure if Math.random() is allowed
 		if (random >= chance) {
 			return true;
 		} else {
@@ -47,12 +49,15 @@ public class ReadyBarberEvent extends Event {
     	
     	barberState = (BarberState) state;
     	barberState.setCurrentTime(getTime());
+    	barberState.removeCustomer(customer);
+    	probability = barberState.getProbability();
     	
-    	if (!isSatisfied())) { // where to get the probability?
-    		eventQueue.addEvent(new DissatisfiedEvent(customer, time));
+    	newReadyBarberTime = barberState.getTime(READY_BARBER);
+    	stopTime = eventQueue.getLast().time();
+    	
+    	if ( !isSatisfied(probability) && newReadyBarberTime < stopTime) { // should get the probabilty from barberState
+    		eventQueue.addEvent(new DissatisfiedEvent(customer, newReadyBarberTime));
     	}
-    	// when called, should check if the customer is satisfied, if not
-    	// it should create a DissatisfiedEvent
     }
 
 }

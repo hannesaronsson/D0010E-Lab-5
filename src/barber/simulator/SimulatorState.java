@@ -8,4 +8,8 @@ import java.util.Observable;
 public class SimulatorState extends Observable {
 
     boolean simulating;
+    
+    public void breakSimulation() {
+    	simulating = false;
+    }
 }

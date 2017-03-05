@@ -12,8 +12,7 @@ import barber.barberShop.EventType;
 
 public class StartEvent extends Event {	
 	
-	private EventType type = EventType.START;
-	private ArrivedEvent firstEvent;
+	private final EventType ARRIVED = EventType.ARRIVED;
 	private BarberState barberState;
 	
 	/**
@@ -21,10 +20,6 @@ public class StartEvent extends Event {
 	 * 
 	 */
 	public StartEvent() {
-		/*
-		 * Should this take the arguments at [Chapter 5, p.2] as parameters? 
-		 * And change the states final variables accordingly?
-		 */
 		setTime(0.0); // because this is the start event, it starts at 0.0
 	}
 	/**
@@ -33,7 +28,7 @@ public class StartEvent extends Event {
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		barberState = (BarberState) state; // assures that this is of BarberState type
 		barberState.setCurrentTime(getTime()); // sets time in state
-		firstEvent = new ArrivedEvent(barberState.getTime(type)); // creates a new ArrivedEvent and sets time
-		eventQueue.addEvent(firstEvent); // and adds it to the queue
+		ArrivedEvent firstEvent = new ArrivedEvent(barberState.getTime(ARRIVED)); // creates a first ArrivedEvent and sets time
+		eventQueue.addEvent(firstEvent); // adds it to the queue
 	}
 }

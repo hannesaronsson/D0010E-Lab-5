@@ -6,7 +6,7 @@ import barber.simulator.EventQueue;
 import barber.simulator.SimulatorState;
 
 /* 
- * När hårklippningen börjar 
+ * Just a draft. Don't use.
  */
 public class StartHaircutEvent extends Event {
 	

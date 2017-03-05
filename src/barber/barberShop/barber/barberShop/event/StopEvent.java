@@ -24,12 +24,15 @@ public class StopEvent extends Event {
 	 * @param state
 	 */
 	private void emergencyBreak(SimulatorState state) {
-		// break the simulation 
-		//state.emergencyBreak();
+		state.breakSimulation();
 	}
 
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
-		emergencyBreak(state);
+		if ( eventQueue.size() != 1) { // has to throw an exception if this is not the last event in the queue, size() method needs to be implemented in EventQueue
+			throw new Exception();
+		} else {
+			emergencyBreak(state);
+		}
 	}
 
 }

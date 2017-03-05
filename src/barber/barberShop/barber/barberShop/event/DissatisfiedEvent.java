@@ -12,9 +12,11 @@ import barber.simulator.SimulatorState;
  */
 public class DissatisfiedEvent extends Event {
 	
-	private EventType type = EventType.DISSATISFIED;
+	private final EventType READY_BARBER = EventType.READY_BARBER;
 	private Customer customer;
 	private BarberState barberState;
+	private double newReadyBarberTime;
+	private double stopTime;
 	
 	/**
 	 * Constructor
@@ -35,7 +37,12 @@ public class DissatisfiedEvent extends Event {
 		barberState = (BarberState) state;
 		barberState.setCurrentTime(getTime());
 		
+		newReadyBarberTime = barberState.getTime(READY_BARBER);
+		stopTime = eventQueue.getLast().time(); // needs some way to get the time in the StopEvent event
 		
+		if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) { // should add to some sort of priority queue
+			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));
+		}	
 	}
 }
 

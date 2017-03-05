@@ -7,7 +7,7 @@ import barber.simulator.SimulatorState;
 
 /*
  * 
- * Inte säker om den här behövs men lägger till den, så får vi diskutera senare
+ * Is not needed. The time when the store is closed is a parameter in the simulator.
  * 
  */
 public class CloseStoreEvent extends Event {
