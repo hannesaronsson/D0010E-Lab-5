@@ -47,6 +47,7 @@ public class ArrivedEvent extends Event {
     	customer = barberState.createCustomer(); // should not return boolean
     	
     	if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) { // only runs if the customer can be added to the queue
+    		//eventQueue.addEvent(new StartHaircutEvent(customer, newHaircutTime));
     		eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime)); // add HaircutEvent and calculate when haircut starts and finishes
     	}
     	

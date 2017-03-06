@@ -32,7 +32,15 @@ public class EventQueue {
         eventQueue.remove(0);
         return firstEvent;
     }
-
+    
+    /**
+     * Used to get the size of the eventQueue
+     * 
+     * @return Size of the list as an int
+     */
+    public int getSize() {
+    	return eventQueue.size();
+    }
 
     /**
      * Sorts eventQueue by the time for each event in the list

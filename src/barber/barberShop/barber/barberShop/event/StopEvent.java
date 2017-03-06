@@ -28,7 +28,7 @@ public class StopEvent extends Event {
 	}
 
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
-		if ( eventQueue.size() != 1) { // has to throw an exception if this is not the last event in the queue, size() method needs to be implemented in EventQueue
+		if ( eventQueue.getSize() == 0) { // has to throw an exception if this is not the last event in the queue, size() method needs to be implemented in EventQueue
 			throw new Exception();
 		} else {
 			emergencyBreak(state);

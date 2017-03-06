@@ -50,12 +50,14 @@ public class ReadyBarberEvent extends Event {
     	barberState = (BarberState) state;
     	barberState.setCurrentTime(getTime());
     	barberState.removeCustomer(customer);
+    	
     	probability = barberState.getProbability();
     	
     	newReadyBarberTime = barberState.getTime(READY_BARBER);
     	stopTime = eventQueue.getLast().time();
     	
     	if ( !isSatisfied(probability) && newReadyBarberTime < stopTime) { // should get the probabilty from barberState
+    		customer.setSatisfied(false);
     		eventQueue.addEvent(new DissatisfiedEvent(customer, newReadyBarberTime));
     	}
     }
