@@ -15,7 +15,7 @@ import barber.barberShop.EventType;
 public class ArrivedEvent extends Event {
     
 	private final EventType ARRIVED = EventType.ARRIVED;
-	private final EventType READY_BARBER = EventType.READY_BARBER;
+	private final EventType START_CUT = EventType.START_CUT;
 	private BarberState barberState;
 	private Customer customer;
 	private double newArrivedTime, newReadyBarberTime, stopTime;
@@ -41,14 +41,14 @@ public class ArrivedEvent extends Event {
     	barberState.setCurrentTime(getTime());
     	
     	newArrivedTime = barberState.getTime(ARRIVED); 
-    	newReadyBarberTime = barberState.getTime(READY_BARBER);
-    	stopTime = eventQueue.getLast().time(); // needs some way to get the time in the StopEvent event
+    	newHaircutTime = barberState.getTime(START_CUT);
+    	stopTime = eventQueue.getEvent(-1).getTime(); // the time in the StopEvent
     			
     	customer = barberState.createCustomer(); // should not return boolean
     	
     	if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) { // only runs if the customer can be added to the queue
-    		//eventQueue.addEvent(new StartHaircutEvent(customer, newHaircutTime));
-    		eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime)); // add HaircutEvent and calculate when haircut starts and finishes
+    		eventQueue.addEvent(new StartHaircutEvent(customer, newHaircutTime));
+    		
     	}
     	
     	if (newArrivedTime > stopTime) { // because an event can't be placed after the StopEvent

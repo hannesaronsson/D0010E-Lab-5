@@ -33,6 +33,10 @@ public class EventQueue {
         return firstEvent;
     }
     
+    public Event getEvent(int index) {
+    	return eventQueue.get(index);
+    }
+    
     /**
      * Used to get the size of the eventQueue
      * 

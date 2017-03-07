@@ -41,7 +41,7 @@ public class StartHaircutEvent extends Event {
 		barberState.removeCustomer(customer);
 		
 		newReadyBarberTime = barberState.getTime(READY_BARBER);
-    	stopTime = eventQueue.getLast().time(); // needs some way to get the time in the StopEvent event
+    	stopTime = eventQueue.getEvent(-1).getTime(); // needs some way to get the time in the StopEvent event
 
 		if (newReadyBarberTime < stopTime) {
 			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));

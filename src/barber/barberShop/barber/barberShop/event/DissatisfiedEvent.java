@@ -40,7 +40,7 @@ public class DissatisfiedEvent extends Event {
 		barberState.setCurrentTime(getTime());
 		
 		newReadyBarberTime = barberState.getTime(READY_BARBER);
-		stopTime = eventQueue.getLast().time(); // needs some way to get the time in the StopEvent event
+		stopTime = eventQueue.getEvent(-1).getTime(); // needs some way to get the time in the StopEvent event
 		canAddToQueue = barberState.addCustomer(customer);
 		
 		if ( canAddToQueue && newReadyBarberTime < stopTime) { // should add to some sort of priority queue
