@@ -8,6 +8,6 @@ public enum EventType {
     START,
     STOP,
     READY_BARBER,
-    DISSATISFIED
-
+    DISSATISFIED,
+    START_HAIRCUT
 }

@@ -22,6 +22,7 @@ public class BarberState extends SimulatorState {
     final double simulationStop = 25;
 
     private double currentTime = 0;
+    CustomerFactory customerFactory = new CustomerFactory();
 
     Time barberTime = new Time(lambda, seed, lowerHairCut, upperHairCut, lowerDissatisfied, upperDissatisfied);
     ArrayList<Customer> barberQueue = new ArrayList<Customer>();
@@ -40,7 +41,7 @@ public class BarberState extends SimulatorState {
     }
 
 	public boolean addCustomer(Customer newCustomer) {
-		//För dissatisfied customers, fixa sen
+		//Om kunden är missnöjd
 		if (!newCustomer.getSatisfied()) {
 			if (barberQueue.size() >= queueCapacity) {
 				//kolla hur många andra kunder som också är missnöjda i kön
@@ -51,11 +52,15 @@ public class BarberState extends SimulatorState {
 				return false;
 			}
 			
-			else
+			else {	
+				//Se till så han hamnar först i kön (efter andra missnödja)
+				//Det som finns nu gör inte det
 				return barberQueue.add(newCustomer);
+			}
 		}
 		
-		else
+		//Om kunden är nöjd
+		else {
 			if (currentTime >= simulationStop)
 				return false;
 			
@@ -78,18 +83,18 @@ public class BarberState extends SimulatorState {
 			case ARRIVED:
 				return barberTime.nextArrivalTime(currentTime);
 			case READY_BARBER:
-				return barberTime.nextHairCutTime(currentTime);
+				return barberTime.HairCutTime() + currentTime;
 			case DISSATISFIED:
 				return barberTime.nextReturnedDissatisfied(currentTime);
+			case START_HAIRCUT:
+				//Behövs metod i Time som ger en tid när klippningen kan börja
+				return 0;
 		}
 		//Fel om detta nås (eclipse kräver en return här)
 		return 0;
 	}
 	
-	public boolean createCustomer() {
-		//Kan inte hämta från factory, måste fixas
-		if (addCustomer(CustomerFactory.newCustomer()))
-			return true;
-		return false;
+	public void createCustomer() {
+		addCustomer(customerFactory.newCustomer());
 	}
 }
