@@ -55,8 +55,8 @@ public class BarberPrint extends SimulatorPrint {
         System.out.printf(" Hair cuts = %d%n Average cutting time = %.2f%n Average queueing time %.2f%n" +
                         " Largest Queue Size = %d%n Customers not cut = %d%n Dissatisfied customers = %d%n " +
                         "Time chairs were idle %.2f%n",
-                barberState.numberOfHairCuts, barberState.totalCuttingTime / barberState.numberOfCustomers,
-                barberState.totalQueueTime / barberState.numberOfHairCuts, barberState.largestQueue,
+                barberState.numberOfCustomers, barberState.totalCuttingTime / barberState.numberOfCustomers,
+                barberState.totalQueueTime / barberState.numberOfCustomers, barberState.largestQueue,
                 barberState.numberOfLostCustomers, barberState.numberOfReturnedCustomers, barberState.totalIdleTime);
 
     }

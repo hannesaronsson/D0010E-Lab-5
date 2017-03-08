@@ -20,6 +20,7 @@ public class CloseEvent extends BarberEvent {
     @Override
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
         barberState = (BarberState) state;
+        barberState.setCurrentTime(getTime());
 
         barberState.close();
         barberState.updateView(this);

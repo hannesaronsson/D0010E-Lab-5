@@ -59,7 +59,7 @@ public class DissatisfiedEvent extends BarberEvent {
             }
         }
 
-        barberState.addReturnedCustomer();
+
     }
 }
 

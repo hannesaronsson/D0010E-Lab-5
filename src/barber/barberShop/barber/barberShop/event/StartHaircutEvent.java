@@ -36,10 +36,7 @@ public class StartHaircutEvent extends BarberEvent {
          * If the customer is a new customer, increase one to numberOfCustomers.
          */
         eventQueue.addEvent(new FinishedEvent(this.customer, barberState.getTime(EventType.HAIR_CUT)));
-        if (this.customer.isFirstTime()) {
-            barberState.newCustomer();
-            this.customer.notFirstTime();
-        }
+
 
     }
 

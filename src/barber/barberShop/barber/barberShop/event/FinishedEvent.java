@@ -56,10 +56,17 @@ public class FinishedEvent extends BarberEvent {
          */
         if (!isSatisfied()) {
             eventQueue.addEvent(new DissatisfiedEvent(customer, barberState.getTime(EventType.RETURNED)));
+            if(this.customer.isFirstTime()) barberState.addReturnedCustomer();
         }
         if (barberState.customerInQueue()) {
             Customer newCustomer = barberState.getFirstCustomer();
             eventQueue.addEvent(new StartHaircutEvent(newCustomer, barberState.getTime(EventType.CURRENT_TIME)));
+        }
+
+        if (this.customer.isFirstTime()) {
+            barberState.newCustomer();
+            this.customer.notFirstTime();
+
         }
 
 
