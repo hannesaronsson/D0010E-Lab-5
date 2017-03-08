@@ -36,9 +36,9 @@ public class BarberPrint extends SimulatorPrint {
 
     @Override
     public void firstPrint() {
-        System.out.printf(" Close Time = %.2f%n QueueCapacity = %d%n Number of chairs = %d%n" +
-                        " Lambda = %.2f%n Seed = %d%n Hair Cut bounds = (%.2f,%.2f)%n " +
-                        "Return bounds = (%.2f,%.2f)%n Risk dissatisfied returns = %.2f%n",
+        System.out.printf(" Closing time ...............: %.2f%n Queue Capacity .............: %d%n Number of chairs ...........: %d%n" +
+                        " Lambda .....................: %.2f%n Seed .......................: %d%n Hair Cut bounds ............:(%.2f,%.2f)%n " +
+                        "Return bounds ..............:(%.2f,%.2f)%n Risk dissatisfied returns ..: %.2f%n",
                 barberState.closeTime, barberState.queueCapacity, barberState.chairs, barberState.lambda,
                 barberState.seed, barberState.lowerHairCut, barberState.upperHairCut, barberState.lowerDissatisfied,
                 barberState.upperDissatisfied, barberState.getP());
@@ -52,9 +52,9 @@ public class BarberPrint extends SimulatorPrint {
     @Override
     public void lastPrint() {
         System.out.println(" ----------------------------------------------------------------------------");
-        System.out.printf(" Hair cuts = %d%n Average cutting time = %.2f%n Average queueing time %.2f%n" +
-                        " Largest Queue Size = %d%n Customers not cut = %d%n Dissatisfied customers = %d%n " +
-                        "Time chairs were idle %.2f%n",
+        System.out.printf(" Number of customers cut .......: %d%n Average cutting time ..........: %.2f%n Average queueing time .........: %.2f%n" +
+                        " Largest Queue Size ............: %d%n Customers not cut .............: %d%n Dissatisfied customers ........: %d%n " +
+                        "Time chairs were idle .........: %.2f%n",
                 barberState.numberOfCustomers, barberState.totalCuttingTime / barberState.numberOfCustomers,
                 barberState.totalQueueTime / barberState.numberOfCustomers, barberState.largestQueue,
                 barberState.numberOfLostCustomers, barberState.numberOfReturnedCustomers, barberState.totalIdleTime);
