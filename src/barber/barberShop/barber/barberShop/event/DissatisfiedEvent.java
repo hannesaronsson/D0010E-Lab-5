@@ -32,6 +32,7 @@ public class DissatisfiedEvent extends Event {
 	}
 	
 	/**
+	 * Adds an dissatisfied customer to the store queue. 
 	 * 
 	 */
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
@@ -40,14 +41,15 @@ public class DissatisfiedEvent extends Event {
 		barberState.setCurrentTime(getTime());
 		
 		newReadyBarberTime = barberState.getTime(READY_BARBER);
-		stopTime = eventQueue.getEvent(-1).getTime(); // needs some way to get the time in the StopEvent event
-		canAddToQueue = barberState.addCustomer(customer);
+		int index = eventQueue.getSize() - 1;
+		stopTime = eventQueue.getEvent(index).getTime(); // gets the time from the StopEvent
+		canAddToQueue = barberState.addCustomer(customer); // checks if the customer can be added to the store queue
+		walkingTime = barberState.getTime(DISSATISFIED);
 		
-		if ( canAddToQueue && newReadyBarberTime < stopTime) { // should add to some sort of priority queue
+		if ( canAddToQueue && newReadyBarberTime < stopTime) { // adds a ReadyBarber event to the event queue if 
 			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));
 		}
-		else if ( !canAddToQueue) { // if the dissatisfied customer can't enter the queue, the customer will go for a walk and come back later
-			walkingTime = barberState.getTime(DISSATISFIED);
+		else if ( !canAddToQueue && walkingTime < stopTime) { // if queue is full, the dissatisfied customer will return later
 			eventQueue.addEvent(new DissatisfiedEvent(customer, walkingTime));
 		}
 	}

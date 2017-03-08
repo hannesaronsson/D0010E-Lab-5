@@ -15,10 +15,11 @@ import barber.barberShop.EventType;
 public class ArrivedEvent extends Event {
     
 	private final EventType ARRIVED = EventType.ARRIVED;
-	private final EventType START_CUT = EventType.START_CUT;
+	private final EventType START_HAIRCUT = EventType.START_HAIRCUT;
 	private BarberState barberState;
 	private Customer customer;
-	private double newArrivedTime, newReadyBarberTime, stopTime;
+	private double newArrivedTime, newReadyBarberTime, stopTime, newHaircutTime;
+	
 	
 	/**
 	 * Constructor
@@ -29,29 +30,27 @@ public class ArrivedEvent extends Event {
     	setTime(time);
     }
     
+    
     /**
      * Adds a customer to the store, creates a new ArrivedEvent at a random time
      */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
-    	/*
-    	 * Can be made to look better, but it's just a draft
-    	 */
     	
     	barberState = (BarberState) state;
     	barberState.setCurrentTime(getTime());
     	
     	newArrivedTime = barberState.getTime(ARRIVED); 
-    	newHaircutTime = barberState.getTime(START_CUT);
-    	stopTime = eventQueue.getEvent(-1).getTime(); // the time in the StopEvent
+    	newHaircutTime = barberState.getTime(START_HAIRCUT);
+    	int index = eventQueue.getSize() - 1;
+    	stopTime = eventQueue.getEvent(index).getTime(); // the time in the StopEvent
     			
-    	customer = barberState.createCustomer(); // should not return boolean
+    	customer = barberState.createCustomer(); // doesn't return a customer
     	
-    	if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) { // only runs if the customer can be added to the queue
+    	if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) {
     		eventQueue.addEvent(new StartHaircutEvent(customer, newHaircutTime));
-    		
     	}
     	
-    	if (newArrivedTime > stopTime) { // because an event can't be placed after the StopEvent
+    	if (newArrivedTime < stopTime) { // because an event can't be placed after the StopEvent
     		eventQueue.addEvent(new ArrivedEvent(newArrivedTime)); 
     	}
     }

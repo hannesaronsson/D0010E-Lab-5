@@ -33,6 +33,12 @@ public class EventQueue {
         return firstEvent;
     }
     
+    /** 
+     * Used to get an element at a certain index in the eventQueue.
+     * 
+     * @param index The index
+     * @return Returns element at index
+     */
     public Event getEvent(int index) {
     	return eventQueue.get(index);
     }

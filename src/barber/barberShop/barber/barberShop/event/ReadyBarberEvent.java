@@ -18,6 +18,7 @@ public class ReadyBarberEvent extends Event {
 	private BarberState barberState;
 	
 	private double newReadyBarberTime, stopTime, probability;
+	private boolean satisfied;
 	
 	/**
 	 * Constructor
@@ -30,11 +31,8 @@ public class ReadyBarberEvent extends Event {
 		setTime(time);
 	}
 	
-	/**
-	 * Decides whether the customer is satisfied or not. 
-	 * 
-	 * @param chance The probability that the customer will not be satisfied
-	 * @return
+	/*
+	 * Returns a boolean randomly. chance decides the probability.
 	 */
 	private boolean isSatisfied(double chance) {
 		double random = Math.random(); // not sure if Math.random() is allowed
@@ -54,9 +52,11 @@ public class ReadyBarberEvent extends Event {
     	probability = barberState.getProbability();
     	
     	newReadyBarberTime = barberState.getTime(READY_BARBER);
-    	stopTime = eventQueue.getEvent(-1).getTime();
+    	int index = eventQueue.getSize() - 1;
+    	stopTime = eventQueue.getEvent(index).getTime();
+    	satisfied = isSatisfied(probability);
     	
-    	if ( !isSatisfied(probability) && newReadyBarberTime < stopTime) { // should get the probabilty from barberState
+    	if (satisfied && newReadyBarberTime < stopTime) { // should get the probabilty from barberState
     		customer.setSatisfied(false);
     		eventQueue.addEvent(new DissatisfiedEvent(customer, newReadyBarberTime));
     	}

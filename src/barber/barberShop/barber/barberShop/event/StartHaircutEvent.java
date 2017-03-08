@@ -29,19 +29,15 @@ public class StartHaircutEvent extends Event {
 		this.customer = customer;
 	}
 	
-	/* 
-	 * Should check if it is this customer's turn, if not maybe it
-	 * should create a new StartHaircutEvent with a new calculated time?
-	 * 
-	 */	
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		 
 		barberState = (BarberState) state;
 		barberState.setCurrentTime(getTime());
-		barberState.removeCustomer(customer);
+		barberState.removeCustomer(customer); // removes the customer from the store queue
 		
 		newReadyBarberTime = barberState.getTime(READY_BARBER);
-    	stopTime = eventQueue.getEvent(-1).getTime(); // needs some way to get the time in the StopEvent event
+		int index = eventQueue.getSize() - 1;
+    	stopTime = eventQueue.getEvent(index).getTime(); // gets the time from the StopEvent
 
 		if (newReadyBarberTime < stopTime) {
 			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));

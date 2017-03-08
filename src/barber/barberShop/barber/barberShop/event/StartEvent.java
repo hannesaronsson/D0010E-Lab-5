@@ -16,19 +16,24 @@ public class StartEvent extends Event {
 	private BarberState barberState;
 	
 	/**
-	 * Constructor
+	 * Constructor.
+	 * Always sets the time of this event to 0. 
 	 * 
 	 */
 	public StartEvent() {
 		setTime(0.0); // because this is the start event, it starts at 0.0
 	}
+	
 	/**
 	 * Executes this event. 
+	 * 
+	 * @param state 		The state to affect.
+	 * @param eventQueue	The queue to store events in.
 	 */
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		barberState = (BarberState) state; // assures that this is of BarberState type
 		barberState.setCurrentTime(getTime()); // sets time in state
-		ArrivedEvent firstEvent = new ArrivedEvent(barberState.getTime(ARRIVED)); // creates a first ArrivedEvent and sets time
-		eventQueue.addEvent(firstEvent); // adds it to the queue
+		ArrivedEvent firstEvent = new ArrivedEvent(barberState.getTime(ARRIVED)); // creates a first ArrivedEvent
+		eventQueue.addEvent(firstEvent); 
 	}
 }
