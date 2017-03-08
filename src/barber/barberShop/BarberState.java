@@ -52,10 +52,24 @@ public class BarberState extends SimulatorState {
 				return false;
 			}
 			
-			else {	
-				//Se till så han hamnar först i kön (efter andra missnödja)
-				//Det som finns nu gör inte det
-				return barberQueue.add(newCustomer);
+			else {
+				int  dissatisfiedAmount = 0;
+				for (int i = 0; i < barberQueue.size(); i++)
+					if (!barberQueue.get(i).getSatisfied())
+						dissatisfiedAmount++;
+				
+				ArrayList<Customer> tempQueue = new ArrayList<Customer>();
+				
+				for (int i = 0; i < dissatisfiedAmount; i++)
+					tempQueue.add(barberQueue.get(i));
+				
+				tempQueue.add(newCustomer);
+				
+				for (int i = dissatisfiedAmount; i < barberQueue.size(); i++)
+					tempQueue.add(barberQueue.get(i));
+				
+				barberQueue = tempQueue;
+				return true;
 			}
 		}
 		
@@ -94,7 +108,7 @@ public class BarberState extends SimulatorState {
 		return 0;
 	}
 	
-	public void createCustomer() {
-		addCustomer(customerFactory.newCustomer());
+	public Customer createCustomer() {
+		return customerFactory.newCustomer();
 	}
 }
