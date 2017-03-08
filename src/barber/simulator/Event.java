@@ -1,32 +1,30 @@
 package barber.simulator;
 
-import barber.random.Time;
-
 /**
  * Created by Mumrik on 2017-02-27.
  */
 public abstract class Event {
 
     private double time;
-    
+
     /**
      * Returns time
-     * 
+     *
      * @return
      */
     public double getTime() {
-    	return time;
+        return time;
     }
-    
+
     /**
      * Sets the time
-     * 
-     * @param time		The time to assign to the variable
+     *
+     * @param time The time to assign to the event
      */
-    public void setTime(double time) {
-    	this.time = time;
+    protected void setTime(double time) {
+        this.time = time;
     }
-    
+
     /**
      * Executes the event
      *

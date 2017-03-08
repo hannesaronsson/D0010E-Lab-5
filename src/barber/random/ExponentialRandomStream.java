@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by Mumrik on 2017-02-27.
  */
-public class ExponentialRandomStream {
+class ExponentialRandomStream {
 
     private Random rand;
     private double lambda;

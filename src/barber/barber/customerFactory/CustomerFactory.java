@@ -4,7 +4,7 @@ package barber.barber.customerFactory;
  * Created by Mumrik on 2017-02-27.
  */
 public class CustomerFactory {
-    private int numberOfCustomers = 0;
+    private int numberOfCustomers = -1;
 
     /**
      * Creates a new customer with an unique ID
@@ -22,7 +22,7 @@ public class CustomerFactory {
      * @return Number of customers
      */
     public int getNumberOfCustomers() {
-        return numberOfCustomers;
+        return numberOfCustomers + 1;
     }
 
 

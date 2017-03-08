@@ -1,7 +1,6 @@
 package barber.simulator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 
@@ -19,7 +18,7 @@ public class EventQueue {
      */
     public void addEvent(Event event) {
         eventQueue.add(event);
-
+        sortEvents();
     }
 
     /**
@@ -38,16 +37,8 @@ public class EventQueue {
      * Sorts eventQueue by the time for each event in the list
      * in an descending order.
      */
-    void sortEvents() {
-        Collections.sort(eventQueue, new Comparator<Event>() {
-            @Override
-            public int compare(Event eventOne, Event eventTwo) {
-                if (eventTwo.getTime() > eventOne.getTime()) return -1;
-                if (eventTwo.getTime() > eventOne.getTime()) return 1;
-                else return 0;
-
-            }
-        });
+    private void sortEvents() {
+        eventQueue.sort(Comparator.comparing(Event::getTime));
     }
 
 

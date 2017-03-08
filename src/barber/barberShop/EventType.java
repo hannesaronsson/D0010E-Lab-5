@@ -1,13 +1,18 @@
 package barber.barberShop;
 
 /**
- * Created by Mumrik on 2017-02-27.
+ * Indicates what type an event is
+ *
+ * @author hannesaronsson
  */
 public enum EventType {
     ARRIVED,
     START,
     STOP,
-    READY_BARBER,
-    DISSATISFIED
+    FINISHED,
+    RETURNED,
+    HAIR_CUT,
+    CURRENT_TIME,
+    CLOSED
 
 }

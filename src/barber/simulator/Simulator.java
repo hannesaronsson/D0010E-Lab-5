@@ -7,6 +7,7 @@ public class Simulator {
 
     private EventQueue eventQueue;
     private SimulatorState state;
+    private SimulatorPrint simulatorPrint;
 
     /**
      * Constructor
@@ -14,10 +15,10 @@ public class Simulator {
      * @param eventQueue The queue for the events for the simulation.
      * @param state      The simulation state.
      */
-    public Simulator(EventQueue eventQueue, SimulatorState state) {
+    public Simulator(EventQueue eventQueue, SimulatorState state, SimulatorPrint simulatorPrint) {
         this.eventQueue = eventQueue;
         this.state = state;
-
+        this.simulatorPrint = simulatorPrint;
     }
 
     /**
@@ -25,10 +26,11 @@ public class Simulator {
      */
     public void run() {
         Event nextEvent;
+        simulatorPrint.firstPrint();
         while (state.simulating) {
-            eventQueue.sortEvents();
             nextEvent = eventQueue.getFirstEvent();
             nextEvent.runEvent(state, eventQueue);
         }
+        simulatorPrint.lastPrint();
     }
 }

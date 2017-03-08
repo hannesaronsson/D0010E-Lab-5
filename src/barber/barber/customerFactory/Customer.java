@@ -5,8 +5,33 @@ package barber.barber.customerFactory;
  */
 public class Customer {
     private int customerID;
-    private boolean satisfied;
+    private boolean satisfied = true;
+    private double enterShop;
+    private boolean firstTime = true;
 
+    public void setEnterShop(double enterShop) {
+        this.enterShop = enterShop;
+    }
+
+    public double getEnterShop() {
+
+        return enterShop;
+    }
+
+    /**
+     * Returns true if its the customers first hair cut.
+     * @return true if its the first hair cut, false otherwise.
+     */
+    public boolean isFirstTime(){
+        return firstTime;
+    }
+
+    /**
+     *Sets firstTime to false.
+     */
+    public void notFirstTime() {
+        this.firstTime = false;
+    }
 
     Customer(int ID) {
         customerID = ID;
@@ -24,7 +49,7 @@ public class Customer {
     /**
      * Checks if the customer was saisfied with their haircut.
      *
-     * @return True if satisifed false if dissatisfied.
+     * @return True if satisfied, false if dissatisfied.
      */
     public boolean getSatisfied() {
         return satisfied;
