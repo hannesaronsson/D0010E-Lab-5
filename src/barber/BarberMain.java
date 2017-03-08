@@ -12,8 +12,12 @@ import barber.simulator.Simulator;
  * Created by Mumrik on 2017-03-02.
  */
 class BarberMain {
-
-
+	
+	/**
+	 * Starts the barber shop simulation.
+	 * 
+	 * @param args
+	 */
     public static void main(String[] args){
         EventQueue eventQueue = new EventQueue();
         BarberState barberState = new BarberState();

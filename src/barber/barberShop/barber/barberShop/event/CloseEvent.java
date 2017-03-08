@@ -17,7 +17,9 @@ public class CloseEvent extends BarberEvent {
         type = EventType.CLOSED;
     }
 
-    @Override
+    /** 
+     * Executes this event.
+     */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
         barberState = (BarberState) state;
 

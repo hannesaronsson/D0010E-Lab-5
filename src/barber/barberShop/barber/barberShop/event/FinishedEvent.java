@@ -41,7 +41,10 @@ public class FinishedEvent extends BarberEvent {
             return false;
         }
     }
-
+    
+    /**
+     * Executes this event.
+     */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
 
         barberState = (BarberState) state;

@@ -13,13 +13,21 @@ import java.util.Observable;
  */
 public class BarberPrint extends SimulatorPrint {
     private BarberState barberState;
-
+    
+    /**
+     * Constructor.
+     * 
+     * @param simulatorState
+     */
     public BarberPrint(SimulatorState simulatorState) {
         super(simulatorState);
         barberState = (BarberState) simulatorState;
     }
 
-    @Override
+    /**
+     * When notified by the observable object, prints information about the current state and the type of event that has
+     * been executed.
+     */
     public void update(Observable o, Object arg) {
         BarberEvent currentEvent = (BarberEvent) arg;
         if (currentEvent.getType() == EventType.START || currentEvent.getType() == EventType.STOP || currentEvent.getType() == EventType.CLOSED)
@@ -34,7 +42,9 @@ public class BarberPrint extends SimulatorPrint {
         }
     }
 
-    @Override
+    /**
+     * Prints information about the barber shop before any events have executed.
+     */
     public void firstPrint() {
         System.out.printf(" Close Time = %.2f%n QueueCapacity = %d%n Number of chairs = %d%n" +
                         " Lambda = %.2f%n Seed = %d%n Hair Cut bounds = (%.2f,%.2f)%n " +
@@ -49,7 +59,9 @@ public class BarberPrint extends SimulatorPrint {
 
     }
 
-    @Override
+    /**
+     * Prints information and statistics about the barber shop after the StopEvent has executed.
+     */
     public void lastPrint() {
         System.out.println(" ----------------------------------------------------------------------------");
         System.out.printf(" Hair cuts = %d%n Average cutting time = %.2f%n Average queueing time %.2f%n" +

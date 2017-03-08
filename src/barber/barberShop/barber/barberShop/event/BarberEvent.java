@@ -14,11 +14,21 @@ abstract public class BarberEvent extends Event {
     EventType type;
     Customer customer;
     BarberState barberState;
-
+    
+    /**
+     * Gets the EventType type of this event.
+     * 
+     * @return The type of this event.
+     */
     public EventType getType() {
         return type;
     }
-
+    
+    /**
+     * Gets the customer stored in this event.
+     * 
+     * @return The customer
+     */
     public Customer getCustomer() {
         return customer;
     }

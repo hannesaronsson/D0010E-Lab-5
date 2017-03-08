@@ -8,13 +8,22 @@ public class Customer {
     private boolean satisfied = true;
     private double enterShop;
     private boolean firstTime = true;
-
+    
+    /**
+     * Sets the time when this customer enters the shop.
+     * 
+     * @param enterShop The time 
+     */
     public void setEnterShop(double enterShop) {
         this.enterShop = enterShop;
     }
-
+    
+    /**
+     * Gets the time when the customer entered the shop.
+     * 
+     * @return enterShop The time when entered the shop.
+     */
     public double getEnterShop() {
-
         return enterShop;
     }
 
@@ -47,7 +56,7 @@ public class Customer {
     }
 
     /**
-     * Checks if the customer was saisfied with their haircut.
+     * Checks if the customer was satisfied with their haircut.
      *
      * @return True if satisfied, false if dissatisfied.
      */

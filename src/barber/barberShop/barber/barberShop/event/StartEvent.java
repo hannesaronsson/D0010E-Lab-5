@@ -31,5 +31,6 @@ public class StartEvent extends BarberEvent {
         firstEvent = new ArrivedEvent(barberState.getTime(EventType.ARRIVED)); // creates a new ArrivedEvent and sets time
         eventQueue.addEvent(firstEvent); // and adds it to the queue
         barberState.updateView(this);
+        
     }
 }

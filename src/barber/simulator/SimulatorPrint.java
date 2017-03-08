@@ -11,8 +11,14 @@ public abstract class SimulatorPrint implements Observer {
     protected SimulatorPrint(SimulatorState simulatorState) {
         this.simulatorState = simulatorState;
     }
-
+    
+    /**
+     * Prints information before the simulation starts.
+     */
     public abstract void firstPrint();
-
+    
+    /**
+     * Prints information after the simulation ends.
+     */
     public abstract void lastPrint();
 }

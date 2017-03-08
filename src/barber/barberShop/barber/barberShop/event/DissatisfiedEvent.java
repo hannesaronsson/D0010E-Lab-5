@@ -26,7 +26,7 @@ public class DissatisfiedEvent extends BarberEvent {
     }
 
     /**
-     *
+     * Executes this event.
      */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
         barberState = (BarberState) state;
@@ -41,17 +41,22 @@ public class DissatisfiedEvent extends BarberEvent {
          * then return later. Else kick the other customer out.
          */
         this.customer.setEnterShop(getTime());
+        
         if (barberState.availableChairs()) {
             barberState.updateView(this);
             eventQueue.addEvent(new StartHaircutEvent(customer, barberState.getTime(EventType.CURRENT_TIME)));
+      
         } else if (!barberState.isQueueFull()) {
             barberState.updateView(this);
             barberState.addCustomer(customer);
+       
         } else {
             lastCustomer = barberState.getLastCustomer();
+            
             if (!lastCustomer.getSatisfied()) {
                 eventQueue.addEvent(new DissatisfiedEvent(this.customer, barberState.getTime(EventType.ARRIVED)));
                 return;
+            
             } else {
                 barberState.updateView(this);
                 barberState.removeCustomer(lastCustomer);
@@ -60,6 +65,7 @@ public class DissatisfiedEvent extends BarberEvent {
         }
 
         barberState.addReturnedCustomer();
+        
     }
 }
 

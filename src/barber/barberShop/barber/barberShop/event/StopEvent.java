@@ -9,7 +9,8 @@ import barber.simulator.SimulatorState;
  * Created by Mumrik on 2017-02-27.
  */
 public class StopEvent extends BarberEvent {
-    /**
+  
+	/**
      * Constructor.
      *
      * @param time Assigns the time to this object.
@@ -18,23 +19,22 @@ public class StopEvent extends BarberEvent {
         type = EventType.STOP;
         setTime(time);
     }
-
+    
     /**
-     * Breaks the simulation
-     *
-     * @param state
+     * Executes this event
      */
-    private void emergencyBreak(SimulatorState state) {
-        // break the simulation
-        //state.emergencyBreak();
-        state.setSimulating(false);
-    }
-
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
         this.barberState = (BarberState) state;
 
         emergencyBreak(state);
         barberState.updateView(this);
+    }
+    
+    /*
+     * Breaks the simulation in state
+     */
+    private void emergencyBreak(SimulatorState state) {
+        state.setSimulating(false);
     }
 }
 

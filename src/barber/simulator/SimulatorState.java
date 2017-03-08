@@ -8,11 +8,21 @@ import java.util.Observable;
 public class SimulatorState extends Observable {
 
     boolean simulating;
-
+    
+    /**
+     * Sets this state's simulation. Either on or off.s
+     * 
+     * @param simulating Boolean to assign
+     */
     public void setSimulating(boolean simulating) {
         this.simulating = simulating;
     }
-
+    
+    /**
+     * Checks if this state is simulating.
+     * 
+     * @return simulating Boolean
+     */
     public boolean isSimulating() {
         return simulating;
     }

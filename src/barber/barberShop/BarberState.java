@@ -65,7 +65,7 @@ public class BarberState extends SimulatorState {
     }
 
     /**
-     * Returns the P-value for dissatisfied customers.
+     * Returns the probability for dissatisfied customers.
      *
      * @return p.
      */
@@ -185,13 +185,8 @@ public class BarberState extends SimulatorState {
         totalIdleTime += chairs * (newCurrentTime - currentTime);
         totalQueueTime += getCurrentQueueSize() * (newCurrentTime - currentTime);
         currentTime = newCurrentTime;
-
     }
-
-    private void removeQueueTime(Customer customer) {
-        totalQueueTime -= currentTime - customer.getEnterShop();
-    }
-
+    
     /**
      * Removes the customer from barberQueue and removes the queue time from that customer.
      *
@@ -252,7 +247,7 @@ public class BarberState extends SimulatorState {
     }
 
     /**
-     * Occupies one chair in the barberQueue by decreasing charis by one.
+     * Occupies one chair in the barberQueue by decreasing chairs by one.
      */
     public void occupyChair() {
         chairs--;
@@ -265,4 +260,9 @@ public class BarberState extends SimulatorState {
         chairs++;
         numberOfHairCuts++;
     }
+
+    private void removeQueueTime(Customer customer) {
+        totalQueueTime -= currentTime - customer.getEnterShop();
+    }
+
 }

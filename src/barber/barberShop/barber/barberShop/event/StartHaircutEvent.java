@@ -24,7 +24,10 @@ public class StartHaircutEvent extends BarberEvent {
         this.customer = customer;
         type = EventType.HAIR_CUT;
     }
-
+    
+    /**
+     * Executes this event.
+     */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
         barberState = (BarberState) state;
         barberState.setCurrentTime(getTime());

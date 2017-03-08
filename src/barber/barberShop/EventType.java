@@ -14,5 +14,4 @@ public enum EventType {
     HAIR_CUT,
     CURRENT_TIME,
     CLOSED
-
 }

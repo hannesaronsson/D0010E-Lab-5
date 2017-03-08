@@ -12,14 +12,12 @@ import barber.barberShop.EventType;
  */
 public class ArrivedEvent extends BarberEvent {
 
-
     /**
      * Constructor.
      *
      * @param time
      */
     ArrivedEvent(double time) {
-
         type = EventType.ARRIVED;
         setTime(time);
     }
@@ -40,20 +38,20 @@ public class ArrivedEvent extends BarberEvent {
         //Updates the view.
         barberState.updateView(this);
 
-        /**
+        /*
          * If there are any available chairs create a StartHairCutEvent right now.
          * If there are no available chairs add the customer to the barberQueue, if the
          * queue is full leave the shop and add one to the numberOfLostCustomers.
          */
         if (barberState.availableChairs()) {
             eventQueue.addEvent(new StartHaircutEvent(customer, barberState.getTime(EventType.CURRENT_TIME)));
+       
         } else if (!barberState.isQueueFull()) {
             barberState.addCustomer(customer);
 
         } else if (barberState.isQueueFull()) {
             barberState.addLostCustomer();
         }
-
 
         eventQueue.addEvent(new ArrivedEvent(barberState.getTime(type))); // adds a new ArrivedEvent to the EventQueue
 

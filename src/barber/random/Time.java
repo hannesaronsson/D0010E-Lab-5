@@ -66,7 +66,12 @@ public class Time {
         return nextTime;
 
     }
-
+    
+    /**
+     * Gives the total time of all haircuts so far in the simulation.
+     * 
+     * @return Total haircut time.
+     */
     public double getTotalHairCutTime() {
         return totalHairCutTime;
     }
