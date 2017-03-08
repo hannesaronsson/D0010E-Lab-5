@@ -70,8 +70,11 @@ public class BarberState extends SimulatorState {
 					if (!barberQueue.get(i).getSatisfied())
 						dissatisfiedAmount++;
 				
-				if (dissatisfiedAmount >= barberQueue.size())
+				if (dissatisfiedAmount >= barberQueue.size()) {
+					setChanged();
+					notifyObservers();
 					return false;
+				}
 				
 				ArrayList<Customer> tempQueue = new ArrayList<Customer>();
 				
@@ -85,6 +88,8 @@ public class BarberState extends SimulatorState {
 						tempQueue.add(barberQueue.get(i));
 				
 				barberQueue = tempQueue;
+				setChanged();
+				notifyObservers();
 				return true;
 			}
 			
@@ -105,21 +110,31 @@ public class BarberState extends SimulatorState {
 					tempQueue.add(barberQueue.get(i));
 				
 				barberQueue = tempQueue;
+				setChanged();
+				notifyObservers();
 				return true;
 			}
 		}
 		
 		//Om kunden är nöjd
 		else {
-			if (currentTime >= simulationStop)
-				return false;
-			
-			else if (barberQueue.size() >= queueCapacity) {
+			if (currentTime >= simulationStop) {
+				setChanged();
+				notifyObservers();
 				return false;
 			}
 			
-			else
-				return barberQueue.add(newCustomer);
+			else if (barberQueue.size() >= queueCapacity) {
+				setChanged();
+				notifyObservers();
+				return false;
+			}
+			
+			else {
+				setChanged();
+				notifyObservers();
+				return barberQueue.add(newCustomer); 
+				}
 		}
 	}
 	
@@ -130,6 +145,8 @@ public class BarberState extends SimulatorState {
      */
 	public boolean removeCustomer(Customer customer)
 	{
+		setChanged();
+		notifyObservers();
 		return barberQueue.remove(customer);
 	}
 
