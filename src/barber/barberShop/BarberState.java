@@ -44,12 +44,27 @@ public class BarberState extends SimulatorState {
 		//Om kunden är missnöjd
 		if (!newCustomer.getSatisfied()) {
 			if (barberQueue.size() >= queueCapacity) {
-				//kolla hur många andra kunder som också är missnöjda i kön
-				//skapa en temp arraylist
-				//lägg in alla missnöjda kunder som var där tidigare
-				//lägg in den nya missnödja kunden OM det finns plats, annars ska kunden ta en runda och återkomma senare
-				//lägg in dom tidigare kunderna som ej var missnödja OM det finns plats, släng ut dom annars
-				return false;
+				int  dissatisfiedAmount = 0;
+				for (int i = 0; i < barberQueue.size(); i++)
+					if (!barberQueue.get(i).getSatisfied())
+						dissatisfiedAmount++;
+				
+				if (dissatisfiedAmount >= barberQueue.size())
+					return false;
+				
+				ArrayList<Customer> tempQueue = new ArrayList<Customer>();
+				
+				for (int i = 0; i < dissatisfiedAmount; i++)
+					tempQueue.add(barberQueue.get(i));
+				
+				tempQueue.add(newCustomer);
+				
+				for (int i = dissatisfiedAmount; i < barberQueue.size(); i++)
+					if (tempQueue.size() < queueCapacity)
+						tempQueue.add(barberQueue.get(i));
+				
+				barberQueue = tempQueue;
+				return true;
 			}
 			
 			else {
