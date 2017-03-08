@@ -18,8 +18,6 @@ public class ArrivedEvent extends Event {
 	private final EventType START_HAIRCUT = EventType.START_HAIRCUT;
 	private BarberState barberState;
 	private Customer customer;
-	private double newArrivedTime, newReadyBarberTime, stopTime, newHaircutTime;
-	
 	
 	/**
 	 * Constructor
@@ -31,22 +29,25 @@ public class ArrivedEvent extends Event {
     }
     
     
-    /**
-     * Adds a customer to the store, creates a new ArrivedEvent at a random time
-     */
+	/**
+	 * Executes this event. 
+	 * 
+	 * @param state 		The state to affect.
+	 * @param eventQueue	The queue to store events in.
+	 */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
     	
     	barberState = (BarberState) state;
     	barberState.setCurrentTime(getTime());
     	
-    	newArrivedTime = barberState.getTime(ARRIVED); 
-    	newHaircutTime = barberState.getTime(START_HAIRCUT);
-    	int index = eventQueue.getSize() - 1;
-    	stopTime = eventQueue.getEvent(index).getTime(); // the time in the StopEvent
+    	int lastIndex = eventQueue.getSize() - 1;
+    	double newArrivedTime = barberState.getTime(ARRIVED); 
+    	double newHaircutTime = barberState.getTime(START_HAIRCUT);
+    	double stopTime = eventQueue.getEvent(lastIndex).getTime(); // the time in the StopEvent
     			
     	customer = barberState.createCustomer(); // doesn't return a customer
     	
-    	if ( barberState.addCustomer(customer) && newReadyBarberTime < stopTime) {
+    	if ( barberState.addCustomer(customer) && newHaircutTime < stopTime) {
     		eventQueue.addEvent(new StartHaircutEvent(customer, newHaircutTime));
     	}
     	

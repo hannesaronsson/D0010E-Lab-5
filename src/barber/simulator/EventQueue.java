@@ -24,6 +24,7 @@ public class EventQueue {
 
     /**
      * Used to get the first element in the list eventQueue.
+     * Also removes it from the queue after returning.
      *
      * @return Returns the first element in the list as an Event.
      */
@@ -37,7 +38,7 @@ public class EventQueue {
      * Used to get an element at a certain index in the eventQueue.
      * 
      * @param index The index
-     * @return Returns element at index
+     * @return Returns an Event at the index
      */
     public Event getEvent(int index) {
     	return eventQueue.get(index);

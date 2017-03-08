@@ -17,9 +17,6 @@ public class ReadyBarberEvent extends Event {
 	private Customer customer;
 	private BarberState barberState;
 	
-	private double newReadyBarberTime, stopTime, probability;
-	private boolean satisfied;
-	
 	/**
 	 * Constructor
 	 * 
@@ -43,18 +40,23 @@ public class ReadyBarberEvent extends Event {
 		}
 	}
 	
+	/**
+	 * Executes this event. 
+	 * 
+	 * @param state 		The state to affect.
+	 * @param eventQueue	The queue to store events in.
+	 */
     public void runEvent(SimulatorState state, EventQueue eventQueue) {
     	
     	barberState = (BarberState) state;
     	barberState.setCurrentTime(getTime());
     	barberState.removeCustomer(customer);
     	
-    	probability = barberState.getProbability();
-    	
-    	newReadyBarberTime = barberState.getTime(READY_BARBER);
-    	int index = eventQueue.getSize() - 1;
-    	stopTime = eventQueue.getEvent(index).getTime();
-    	satisfied = isSatisfied(probability);
+    	int lastIndex = eventQueue.getSize() - 1;
+    	double probability = barberState.getProbability();
+    	double newReadyBarberTime = barberState.getTime(READY_BARBER);
+    	double stopTime = eventQueue.getEvent(lastIndex).getTime();
+    	boolean satisfied = isSatisfied(probability);
     	
     	if (satisfied && newReadyBarberTime < stopTime) { // should get the probabilty from barberState
     		customer.setSatisfied(false);

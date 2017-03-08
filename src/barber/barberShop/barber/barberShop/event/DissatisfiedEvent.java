@@ -17,9 +17,6 @@ public class DissatisfiedEvent extends Event {
 	private Customer customer;
 	private BarberState barberState;
 	
-	private double newReadyBarberTime, walkingTime, stopTime;
-	private boolean canAddToQueue;
-	
 	/**
 	 * Constructor
 	 * 
@@ -32,21 +29,24 @@ public class DissatisfiedEvent extends Event {
 	}
 	
 	/**
-	 * Adds an dissatisfied customer to the store queue. 
+	 * Executes this event. 
 	 * 
+	 * @param state 		The state to affect.
+	 * @param eventQueue	The queue to store events in.
 	 */
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		
 		barberState = (BarberState) state;
 		barberState.setCurrentTime(getTime());
 		
-		newReadyBarberTime = barberState.getTime(READY_BARBER);
-		int index = eventQueue.getSize() - 1;
-		stopTime = eventQueue.getEvent(index).getTime(); // gets the time from the StopEvent
-		canAddToQueue = barberState.addCustomer(customer); // checks if the customer can be added to the store queue
-		walkingTime = barberState.getTime(DISSATISFIED);
+		int lastIndex = eventQueue.getSize() - 1;
+		boolean canAddToQueue = barberState.addCustomer(customer); // checks if the customer can be added to the store queue
 		
-		if ( canAddToQueue && newReadyBarberTime < stopTime) { // adds a ReadyBarber event to the event queue if 
+		double newReadyBarberTime = barberState.getTime(READY_BARBER);
+		double stopTime = eventQueue.getEvent(lastIndex).getTime(); // gets the time from the StopEvent
+		double walkingTime = barberState.getTime(DISSATISFIED);
+		
+		if ( canAddToQueue && newReadyBarberTime < stopTime) { // adds a ReadyBarber event to the event queue if possible
 			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));
 		}
 		else if ( !canAddToQueue && walkingTime < stopTime) { // if queue is full, the dissatisfied customer will return later

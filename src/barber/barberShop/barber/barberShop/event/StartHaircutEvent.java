@@ -12,12 +12,11 @@ import barber.simulator.SimulatorState;
  */
 public class StartHaircutEvent extends Event {
 	
-	private Customer customer;
-	private BarberState barberState;
-	private double newReadyBarberTime, stopTime;
 	private final EventType READY_BARBER = EventType.READY_BARBER;
 	
-	
+	private Customer customer;
+	private BarberState barberState;
+
 	/**
 	 * Constructor
 	 * 
@@ -29,15 +28,21 @@ public class StartHaircutEvent extends Event {
 		this.customer = customer;
 	}
 	
+	/**
+	 * Executes this event. 
+	 * 
+	 * @param state 		The state to affect.
+	 * @param eventQueue	The queue to store events in.
+	 */
 	public void runEvent(SimulatorState state, EventQueue eventQueue) {
 		 
 		barberState = (BarberState) state;
 		barberState.setCurrentTime(getTime());
 		barberState.removeCustomer(customer); // removes the customer from the store queue
 		
-		newReadyBarberTime = barberState.getTime(READY_BARBER);
-		int index = eventQueue.getSize() - 1;
-    	stopTime = eventQueue.getEvent(index).getTime(); // gets the time from the StopEvent
+		double newReadyBarberTime = barberState.getTime(READY_BARBER);
+		int lastIndex = eventQueue.getSize() - 1;
+    	double stopTime = eventQueue.getEvent(lastIndex).getTime(); // gets the time from the StopEvent
 
 		if (newReadyBarberTime < stopTime) {
 			eventQueue.addEvent(new ReadyBarberEvent(customer, newReadyBarberTime));
