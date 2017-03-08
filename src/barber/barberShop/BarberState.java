@@ -7,7 +7,9 @@ import barber.random.Time;
 import barber.simulator.SimulatorState;
 
 /**
- * Created by Mumrik on 2017-02-27.
+ * This object keeps track of the time and customers waiting in line.
+ *
+ * @author Kevin Träff on 2017-03-08.
  */
 
 public class BarberState extends SimulatorState {
@@ -28,18 +30,37 @@ public class BarberState extends SimulatorState {
     ArrayList<Customer> barberQueue = new ArrayList<Customer>();
     ArrayList<Customer> dissatisfiedQueue = new ArrayList<Customer>();
 
+    /**
+     * Gives the current time.
+     *
+     * @return The current time.
+     */
     public double getCurrentTime() {
     	return currentTime;
     }
-
+    
+    /**
+     * Sets the current time to a new given time.
+     *
+     */
     public void setCurrentTime(double newCurrentTime) {
     	currentTime = newCurrentTime;
     }
 
+    /**
+     * Gives the current amount of customers in the queue.
+     *
+     * @return The current amount of customers in the queue.
+     */
     public int getCurrentQueueSize() {
     	return barberQueue.size();
     }
 
+    /**
+     * Adds a new customer to the queue
+     *
+     * @return If the customer could be added to the queue or not.
+     */
 	public boolean addCustomer(Customer newCustomer) {
 		//Om kunden är missnöjd
 		if (!newCustomer.getSatisfied()) {
@@ -101,12 +122,22 @@ public class BarberState extends SimulatorState {
 				return barberQueue.add(newCustomer);
 		}
 	}
-
+	
+    /**
+     * Removes a given customer from the queue.
+     *
+     * @return If the customer could be removed or not.
+     */
 	public boolean removeCustomer(Customer customer)
 	{
 		return barberQueue.remove(customer);
 	}
 
+    /**
+     * Gives a specified time depending on which eventType is given.
+     *
+     * @return A specified time.
+     */
 	public double getTime(EventType eventType) {
 		switch(eventType) {
 			case ARRIVED:
@@ -123,6 +154,11 @@ public class BarberState extends SimulatorState {
 		return 0;
 	}
 	
+    /**
+     * Gives a new customer.
+     *
+     * @return The new customer.
+     */
 	public Customer createCustomer() {
 		return customerFactory.newCustomer();
 	}
