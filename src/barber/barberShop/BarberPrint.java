@@ -28,7 +28,7 @@ public class BarberPrint extends SimulatorPrint {
         else {
             System.out.printf("%6s %-9s %3s %5s %8s %7s %7s %7s %7s %7s%n", formatFloatToString(currentEvent.getTime()), currentEvent.getType(),
                     currentEvent.getCustomer().getCustomerID(), barberState.chairs, formatFloatToString(barberState.totalIdleTime),
-                    formatFloatToString(barberState.totalQueueTime), barberState.getCurrentQueueSize(), barberState.numberOfHairCuts,
+                    formatFloatToString(barberState.totalQueueTime), barberState.getCurrentQueueSize(), barberState.numberOfCustomers,
                     barberState.numberOfLostCustomers, barberState.numberOfReturnedCustomers);
 
         }
